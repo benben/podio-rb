@@ -4,7 +4,6 @@ module Podio
   module Middleware
     class OAuth2 < Faraday::Middleware
       def call(env)
-        podio_client = env[:request][:client]
         orig_env = env.dup
 
         begin
