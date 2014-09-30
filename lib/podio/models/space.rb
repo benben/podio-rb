@@ -59,7 +59,7 @@ class Podio::Space < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url '/space/'
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -115,14 +115,14 @@ class Podio::Space < ActivePodio::Base
     def validate_url_label(org_id, url_label)
       Podio.connection.post { |req|
         req.url "/space/org/#{org_id}/url/validate"
-        req.body = {:url_label => url_label}
+        req.params = {:url_label => url_label}
       }.body
     end
 
     def get_overdue_info(space_id)
       Podio.connection.get("/space/#{space_id}/overdue").body
     end
-    
+
     def get_count(org_id)
       Podio.connection.get("/space/org/#{org_id}").body['count']
     end

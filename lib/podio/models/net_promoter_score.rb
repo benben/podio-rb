@@ -13,14 +13,14 @@ class Podio::NetPromoterScore < ActivePodio::Base
     def create(attributes=[])
       member Podio.connection.post { |req|
         req.url("/nps/")
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 
     def update(nps_id, attributes)
       member Podio.connection.put { |req|
         req.url("/nps/#{nps_id}")
-        req.body = attributes
+        req.params = attributes
       }.body
     end
   end

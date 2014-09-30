@@ -16,7 +16,7 @@ class Podio::Referral < ActivePodio::Base
     def update_teaser_status(status)
       response = Podio.connection.put do |req|
         req.url "/referral/status"
-        req.body = { :status => status }
+        req.params = { :status => status }
       end
       response.status
     end

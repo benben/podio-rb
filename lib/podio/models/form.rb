@@ -22,7 +22,7 @@ class Podio::Form < ActivePodio::Base
     def create(app_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/form/app/#{app_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body['form_id']
@@ -32,7 +32,7 @@ class Podio::Form < ActivePodio::Base
     def update(form_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/form/#{form_id}"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.status

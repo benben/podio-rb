@@ -30,14 +30,14 @@ class Podio::Promotion < ActivePodio::Base
     def create(attributes)
       member Podio.connection.post { |req|
         req.url("/promotion/")
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 
     def update(promotion_id, attributes)
       member Podio.connection.put { |req|
         req.url("/promotion/#{promotion_id}")
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 
@@ -74,14 +74,14 @@ class Podio::Promotion < ActivePodio::Base
     def end(promotion_id, body = nil)
       Podio.connection.post { |req|
         req.url "/promotion/#{promotion_id}/end"
-        req.body = body
+        req.params = body
       }
     end
 
     def click(promotion_id, body = nil)
       Podio.connection.post { |req|
         req.url "/promotion/#{promotion_id}/click"
-        req.body = body
+        req.params = body
       }
     end
   end

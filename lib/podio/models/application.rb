@@ -105,7 +105,7 @@ class Podio::Application < ActivePodio::Base
     def update_order(space_id, app_ids = [])
       response = Podio.connection.put do |req|
         req.url "/app/space/#{space_id}/order"
-        req.body = app_ids
+        req.params = app_ids
       end
 
       response.body
@@ -115,7 +115,7 @@ class Podio::Application < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url "/app/"
-        req.body = attributes
+        req.params = attributes
       end
       response.body['app_id']
     end
@@ -124,7 +124,7 @@ class Podio::Application < ActivePodio::Base
     def update(app_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/app/#{app_id}"
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end
@@ -133,7 +133,7 @@ class Podio::Application < ActivePodio::Base
     def update_description(app_id, description)
       response = Podio.connection.put do |req|
         req.url "/app/#{app_id}/description"
-        req.body = {:description => description}
+        req.params = {:description => description}
       end
       response.status
     end
@@ -142,7 +142,7 @@ class Podio::Application < ActivePodio::Base
     def update_usage(app_id, usage)
       response = Podio.connection.put do |req|
         req.url "/app/#{app_id}/usage"
-        req.body = {:usage => usage}
+        req.params = {:usage => usage}
       end
       response.status
     end
@@ -151,7 +151,7 @@ class Podio::Application < ActivePodio::Base
     def install(app_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/app/#{app_id}/install"
-        req.body = attributes
+        req.params = attributes
       end
       response.body['app_id']
     end

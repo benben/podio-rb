@@ -21,7 +21,7 @@ class Podio::ConversationEvent < ActivePodio::Base
     def add_participants(conversation_id, participants)
       response = Podio.connection.post do |req|
         req.url "/conversation/#{conversation_id}/participant/v2/"
-        req.body = { :participants => participants }
+        req.params = { :participants => participants }
       end
       list response.body
     end
@@ -29,7 +29,7 @@ class Podio::ConversationEvent < ActivePodio::Base
     def create_reply(conversation_id, text, file_ids=[], embed_id=nil, embed_file_id=nil)
       response = Podio.connection.post do |req|
         req.url "/conversation/#{conversation_id}/reply/v2"
-        req.body = {:text => text, :file_ids => file_ids, :embed_id => embed_id, :embed_file_id => embed_file_id}
+        req.params = {:text => text, :file_ids => file_ids, :embed_id => embed_id, :embed_file_id => embed_file_id}
       end
       member response.body
     end
@@ -42,9 +42,9 @@ class Podio::ConversationEvent < ActivePodio::Base
     def change_subject(conversation_id, subject)
       response = Podio.connection.put do |req|
         req.url "/conversation/#{conversation_id}/subject"
-        req.body = { :subject => subject }
+        req.params = { :subject => subject }
       end
-      
+
       member response.body
     end
   end

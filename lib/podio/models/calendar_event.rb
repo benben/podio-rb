@@ -18,7 +18,7 @@ class Podio::CalendarEvent < ActivePodio::Base
   property :link, :string
   property :app, :hash
   property :source, :string
-  
+
   alias_method :id, :uid
 
   class << self
@@ -50,38 +50,38 @@ class Podio::CalendarEvent < ActivePodio::Base
       }.body
     end
 
-    # @see 
+    # @see
     def move_event(uid, attributes={})
       response = Podio.connection.post do |req|
         req.url "/calendar/event/#{uid}/move"
-        req.body = attributes
+        req.params = attributes
       end
       member response.body
     end
 
-    # @see 
+    # @see
     def move_event_external(linked_account_id, uid, attributes={})
       response = Podio.connection.post do |req|
         req.url "/calendar/linked_account/#{linked_account_id}/event/#{CGI.escape(uid)}/move"
-        req.body = attributes
+        req.params = attributes
       end
       member response.body
     end
 
-    # @see 
+    # @see
     def update_event_duration(uid, attributes={})
       response = Podio.connection.put do |req|
         req.url "/calendar/event/#{uid}/duration"
-        req.body = attributes
+        req.params = attributes
       end
       member response.body
     end
 
-    # @see 
+    # @see
     def update_event_duration_external(linked_account_id, uid, attributes={})
       response = Podio.connection.put do |req|
         req.url "/calendar/linked_account/#{linked_account_id}/event/#{CGI.escape(uid)}/duration"
-        req.body = attributes
+        req.params = attributes
       end
       member response.body
     end
@@ -129,7 +129,7 @@ class Podio::CalendarEvent < ActivePodio::Base
     def set_reference_export(linked_account_id, ref_type, ref_id, attributes={})
       response = Podio.connection.put do |req|
         req.url "/calendar/export/linked_account/#{linked_account_id}/#{ref_type}/#{ref_id}"
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end
@@ -150,7 +150,7 @@ class Podio::CalendarEvent < ActivePodio::Base
     def set_global_export(linked_account_id, attributes={})
       response = Podio.connection.put do |req|
         req.url "/calendar/export/linked_account/#{linked_account_id}"
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end

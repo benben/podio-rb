@@ -86,7 +86,7 @@ class Podio::Conversation < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url '/conversation/v2/'
-        req.body = attributes
+        req.params = attributes
       end
       member response.body
     end
@@ -95,7 +95,7 @@ class Podio::Conversation < ActivePodio::Base
     def create_for_reference(ref_type, ref_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/conversation/#{ref_type}/#{ref_id}/"
-        req.body = attributes
+        req.params = attributes
       end
       response.body
     end
@@ -104,7 +104,7 @@ class Podio::Conversation < ActivePodio::Base
     def create_reply(conversation_id, text, file_ids=[], embed_id=nil, embed_file_id=nil)
       response = Podio.connection.post do |req|
         req.url "/conversation/#{conversation_id}/reply"
-        req.body = {:text => text, :file_ids => file_ids, :embed_id => embed_id, :embed_file_id => embed_file_id}
+        req.params = {:text => text, :file_ids => file_ids, :embed_id => embed_id, :embed_file_id => embed_file_id}
       end
       response.body['message_id']
     end
@@ -113,7 +113,7 @@ class Podio::Conversation < ActivePodio::Base
     def add_participants(conversation_id, participants)
       response = Podio.connection.post do |req|
         req.url "/conversation/#{conversation_id}/participant/"
-        req.body = { :participants => participants }
+        req.params = { :participants => participants }
       end
       response.body
     end
@@ -121,7 +121,7 @@ class Podio::Conversation < ActivePodio::Base
     def add_participant(conversation_id, user_id)
       response = Podio.connection.post do |req|
         req.url "/conversation/#{conversation_id}/participant/"
-        req.body = { :user_id => user_id }
+        req.params = { :user_id => user_id }
       end
       response.body
     end

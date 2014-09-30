@@ -52,7 +52,7 @@ class Podio::FileAttachment < ActivePodio::Base
         req.options[:timeout] = 1200
         req.url "/file/v2/"
         req.headers['Content-Type'] = 'multipart/form-data'
-        req.body = {:source => Faraday::UploadIO.new(file_stream, nil, nil), :filename => file_name}
+        req.params = {:source => Faraday::UploadIO.new(file_stream, nil, nil), :filename => file_name}
       end
 
       member response.body
@@ -61,7 +61,7 @@ class Podio::FileAttachment < ActivePodio::Base
     def upload_from_url(url)
       response = Podio.client.connection.post do |req|
         req.url "/file/from_url/"
-        req.body = {:url => url}
+        req.params = {:url => url}
       end
 
       member response.body
@@ -72,7 +72,7 @@ class Podio::FileAttachment < ActivePodio::Base
     def attach(id, ref_type, ref_id)
       Podio.connection.post do |req|
         req.url "/file/#{id}/attach"
-        req.body = {:ref_type => ref_type, :ref_id => ref_id}
+        req.params = {:ref_type => ref_type, :ref_id => ref_id}
       end
     end
 
@@ -141,7 +141,7 @@ class Podio::FileAttachment < ActivePodio::Base
     def replace(old_file_id, new_file_id)
       Podio.connection.post { |req|
         req.url "/file/#{new_file_id}/replace"
-        req.body = { :old_file_id => old_file_id }
+        req.params = { :old_file_id => old_file_id }
       }.body
     end
 
@@ -149,7 +149,7 @@ class Podio::FileAttachment < ActivePodio::Base
     def update(id, description)
       Podio.connection.put { |req|
         req.url "/file/#{file_id}"
-        req.body = { :description => description }
+        req.params = { :description => description }
       }.body
     end
 
@@ -163,7 +163,7 @@ class Podio::FileAttachment < ActivePodio::Base
     def create(name, content_type)
       response = Podio.connection.post do |req|
         req.url "/file/"
-        req.body = { :name => name, :mimetype => content_type }
+        req.params = { :name => name, :mimetype => content_type }
       end
 
       response.body

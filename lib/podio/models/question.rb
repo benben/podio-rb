@@ -14,7 +14,7 @@ class Podio::Question < ActivePodio::Base
     def create(ref_type, ref_id, text, options)
       response = Podio.connection.post do |req|
         req.url "/question/#{ref_type}/#{ref_id}/"
-        req.body = {:text => text, :options => options }
+        req.params = {:text => text, :options => options }
       end
       member response.body
     end
@@ -22,9 +22,9 @@ class Podio::Question < ActivePodio::Base
     def answer(question_id, ref_type, ref_id, question_option_id)
       response = Podio.connection.post do |req|
         req.url "/question/#{question_id}/#{ref_type}/#{ref_id}/"
-        req.body = {:question_option_id => question_option_id }
+        req.params = {:question_option_id => question_option_id }
       end
-      
+
       response.status
     end
 

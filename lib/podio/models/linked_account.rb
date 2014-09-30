@@ -20,7 +20,7 @@ class Podio::LinkedAccount < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url '/linked_account/'
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body
@@ -33,7 +33,7 @@ class Podio::LinkedAccount < ActivePodio::Base
     def update_options(id, attributes)
       Podio.connection.put do |req|
         req.url "/linked_account/#{id}/options"
-        req.body = attributes
+        req.params = attributes
       end
     end
 

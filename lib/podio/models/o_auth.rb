@@ -4,7 +4,7 @@ class Podio::OAuth < ActivePodio::Base
     def authorize(attributes)
       response = Podio.connection.post do |req|
         req.url "/oauth/authorize"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -13,7 +13,7 @@ class Podio::OAuth < ActivePodio::Base
     def get_info(attributes)
       response = Podio.connection.post do |req|
         req.url "/oauth/info"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -23,7 +23,7 @@ class Podio::OAuth < ActivePodio::Base
     def get_access_token(attributes)
       response = Podio.connection.post do |req|
         req.url "/oauth/token"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body

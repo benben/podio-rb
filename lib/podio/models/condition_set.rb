@@ -21,14 +21,14 @@ class Podio::ConditionSet < ActivePodio::Base
     def create(attributes)
       member Podio.connection.post { |req|
         req.url("/condition_set/")
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 
     def update(condition_set_id, attributes)
       member Podio.connection.put { |req|
         req.url("/condition_set/#{condition_set_id}")
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 

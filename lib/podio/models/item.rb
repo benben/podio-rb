@@ -132,7 +132,7 @@ class Podio::Item < ActivePodio::Base
     def find_by_filter_id(app_id, filter_id, attributes)
       collection Podio.connection.post { |req|
         req.url "/item/app/#{app_id}/filter/#{filter_id}/"
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 
@@ -141,7 +141,7 @@ class Podio::Item < ActivePodio::Base
       attributes[:filters] = filter_values
       collection Podio.connection.post { |req|
         req.url("/item/app/#{app_id}/filter/", options)
-        req.body = attributes
+        req.params = attributes
       }.body
     end
 
@@ -172,7 +172,7 @@ class Podio::Item < ActivePodio::Base
     def calculate(app_id, config)
       response = Podio.connection.post do |req|
         req.url "/item/app/#{app_id}/calculate"
-        req.body = config
+        req.params = config
       end
 
       response.body
@@ -196,7 +196,7 @@ class Podio::Item < ActivePodio::Base
     def export(app_id, exporter, options={})
       response = Podio.connection.post { |req|
         req.url "/item/app/#{app_id}/export/#{exporter}"
-        req.body = options
+        req.params = options
       }.body
     end
 
@@ -211,7 +211,7 @@ class Podio::Item < ActivePodio::Base
     def create(app_id, attributes, options={})
       response = Podio.connection.post do |req|
         req.url("/item/app/#{app_id}/", options)
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body
@@ -221,7 +221,7 @@ class Podio::Item < ActivePodio::Base
     def update(id, attributes, options={})
       response = Podio.connection.put do |req|
         req.url("/item/#{id}", options)
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end
@@ -230,7 +230,7 @@ class Podio::Item < ActivePodio::Base
     def bulk_delete(app_id, attributes)
       response = Podio.connection.post do |req|
         req.url("/item/app/#{app_id}/delete")
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -259,7 +259,7 @@ class Podio::Item < ActivePodio::Base
     def set_participation(id, status)
       response = Podio.connection.put do |req|
         req.url "/item/#{id}/participation"
-        req.body = { :status => status }
+        req.params = { :status => status }
       end
       response.status
     end
@@ -271,7 +271,7 @@ class Podio::Item < ActivePodio::Base
     def rearrange(id, attributes)
       response = Podio.connection.post do |req|
         req.url "/item/#{id}/rearrange"
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body

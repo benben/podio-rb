@@ -13,7 +13,7 @@ class Podio::Experiment < ActivePodio::Base
     def create_subject(attributes)
       response = Podio.client.trusted_connection.post do |req|
         req.url '/experiment/subject/'
-        req.body = attributes
+        req.params = attributes
       end
       response.body['identifier']
     end
@@ -25,7 +25,7 @@ class Podio::Experiment < ActivePodio::Base
     def find_variation_for_subject(identifier, experiment, supported_variations)
       response = Podio.client.trusted_connection.post do |req|
         req.url "/experiment/#{experiment}/subject/#{identifier}"
-        req.body = supported_variations
+        req.params = supported_variations
       end
       response.body['variation']
     end
@@ -33,7 +33,7 @@ class Podio::Experiment < ActivePodio::Base
     def find_variation_for_user(experiment, supported_variations)
       response = Podio.connection.post do |req|
         req.url "/experiment/#{experiment}/user"
-        req.body = supported_variations
+        req.params = supported_variations
       end
       response.body['variation']
     end
@@ -65,14 +65,14 @@ class Podio::Experiment < ActivePodio::Base
     def update_variation_weight(experiment, variation, weight)
       Podio.connection.post do |req|
         req.url "/experiment/#{experiment}/variation/#{variation}/weight"
-        req.body = { "weight" => weight }
+        req.params = { "weight" => weight }
       end
     end
 
     def assign_variation(experiment, variation, attributes)
       Podio.connection.post do |req|
         req.url "/experiment/#{experiment}/variation/#{variation}/assign"
-        req.body = attributes
+        req.params = attributes
       end
     end
 
@@ -87,7 +87,7 @@ class Podio::Experiment < ActivePodio::Base
 
       connection.post do |req|
         req.url "/experiment/combined"
-        req.body = body
+        req.params = body
       end.body
     end
   end

@@ -20,7 +20,7 @@ class Podio::ItemField < ActivePodio::Base
     def update(item_id, field_id, values, options = {})
       response = Podio.connection.put do |req|
         req.url("/item/#{item_id}/value/#{field_id}", options)
-        req.body = values
+        req.params = values
       end
       response.body
     end

@@ -56,7 +56,7 @@ class Podio::Organization < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/org/#{id}"
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end
@@ -69,7 +69,7 @@ class Podio::Organization < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url '/org/'
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -98,7 +98,7 @@ class Podio::Organization < ActivePodio::Base
     def validate_url_label(url_label)
       Podio.connection.post { |req|
         req.url '/org/url/validate'
-        req.body = {:url_label => url_label}
+        req.params = {:url_label => url_label}
       }.body
     end
 
@@ -118,7 +118,7 @@ class Podio::Organization < ActivePodio::Base
     def update_billing_profile(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/org/#{id}/billing"
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end

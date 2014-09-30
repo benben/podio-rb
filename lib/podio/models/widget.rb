@@ -20,7 +20,7 @@ class Podio::Widget < ActivePodio::Base
     def create(ref_type, ref_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/widget/#{ref_type}/#{ref_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body
@@ -30,7 +30,7 @@ class Podio::Widget < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/widget/#{id}"
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body
@@ -45,7 +45,7 @@ class Podio::Widget < ActivePodio::Base
     def update_order(ref_type, ref_id, widget_list)
       response = Podio.connection.put do |req|
         req.url "/widget/#{ref_type}/#{ref_id}/order"
-        req.body = widget_list
+        req.params = widget_list
       end
 
       response.status
@@ -60,12 +60,12 @@ class Podio::Widget < ActivePodio::Base
     def find_all_for_reference(ref_type, ref_id)
       list Podio.connection.get("/widget/#{ref_type}/#{ref_id}/display/").body
     end
-    
+
     # @see https://developers.podio.com/doc/widgets/clone-widget-105850650
     def clone(id, attributes)
       response = Podio.connection.post do |req|
         req.url "/widget/#{id}/clone"
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body

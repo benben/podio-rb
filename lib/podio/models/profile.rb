@@ -130,7 +130,7 @@ class Podio::Profile < ActivePodio::Base
     def create_space_contact(space_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/contact/space/#{space_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -145,7 +145,7 @@ class Podio::Profile < ActivePodio::Base
     def update_contact(profile_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/contact/#{profile_id}"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body

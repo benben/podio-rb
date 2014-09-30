@@ -24,7 +24,7 @@ class Podio::Contact < Podio::Profile
     def find_external(linked_acc_id, external_contact_id)
       member Podio.connection.post { |req|
         req.url "/contact/linked_account/#{linked_acc_id}"
-        req.body = { :external_contact_id => external_contact_id }
+        req.params = { :external_contact_id => external_contact_id }
       }.body
     end
   end

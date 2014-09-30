@@ -57,7 +57,7 @@ class Podio::AppStoreShare < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url "/app_store/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body['share_id']
@@ -67,7 +67,7 @@ class Podio::AppStoreShare < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/app_store/#{id}"
-        req.body = attributes
+        req.params = attributes
       end
     end
 
@@ -82,7 +82,7 @@ class Podio::AppStoreShare < ActivePodio::Base
     def install(share_id, space_id, dependencies, social = true)
       response = Podio.connection.post do |req|
         req.url "/app_store/#{share_id}/install/v2"
-        req.body = {:space_id => space_id, :dependencies => dependencies, :social => social}
+        req.params = {:space_id => space_id, :dependencies => dependencies, :social => social}
       end
 
       response.body
@@ -123,7 +123,7 @@ class Podio::AppStoreShare < ActivePodio::Base
     def set_recommended_for_area(area, share_ids)
       response = Podio.connection.put do |req|
         req.url "/app_store/recommended/#{area}/"
-        req.body = share_ids
+        req.params = share_ids
       end
 
       response.status

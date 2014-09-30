@@ -33,7 +33,7 @@ class Podio::Filter < ActivePodio::Base
     def create(app_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/filter/app/#{app_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body['filter_id']

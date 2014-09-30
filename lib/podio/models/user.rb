@@ -36,7 +36,7 @@ class Podio::User < ActivePodio::Base
     def create(attributes)
       response = Podio.client.trusted_connection.post do |req|
         req.url '/user/'
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body['user_id']
@@ -45,7 +45,7 @@ class Podio::User < ActivePodio::Base
     def create_inactive(attributes)
       response = Podio.client.trusted_connection.post do |req|
         req.url '/user/inactive/'
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body['user_id']
@@ -77,7 +77,7 @@ class Podio::User < ActivePodio::Base
     def activate(attributes)
       response = Podio.client.trusted_connection.post do |req|
         req.url '/user/activate_user'
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body
@@ -110,7 +110,7 @@ class Podio::User < ActivePodio::Base
     def set_properties(attributes)
       response = Podio.connection.put do |req|
         req.url '/user/property/'
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -124,7 +124,7 @@ class Podio::User < ActivePodio::Base
     def mail_verification(attributes)
       response = Podio.connection.post do |req|
         req.url '/user/mail_verification/'
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -137,7 +137,7 @@ class Podio::User < ActivePodio::Base
     def recover(mail)
       response = Podio.client.trusted_connection.post do |req|
         req.url '/user/recover_password'
-        req.body = {:mail => mail}
+        req.params = {:mail => mail}
       end
 
       response.status
@@ -146,7 +146,7 @@ class Podio::User < ActivePodio::Base
     def reset(password, recovery_code)
       response = Podio.client.trusted_connection.post do |req|
         req.url '/user/reset_password'
-        req.body = {:password => password, :recovery_code => recovery_code}
+        req.params = {:password => password, :recovery_code => recovery_code}
       end
 
       response.body
@@ -163,7 +163,7 @@ class Podio::User < ActivePodio::Base
     def merge(activation_code)
       response = Podio.connection.post do |req|
         req.url '/user/merge'
-        req.body = {:activation_code => activation_code}
+        req.params = {:activation_code => activation_code}
       end
 
       response.status
@@ -176,7 +176,7 @@ class Podio::User < ActivePodio::Base
     def resend_signup_email(mail)
       response = Podio.connection.post do |req|
         req.url '/user/resend_signup_email'
-        req.body = {:mail => mail}
+        req.params = {:mail => mail}
       end
 
       response.status

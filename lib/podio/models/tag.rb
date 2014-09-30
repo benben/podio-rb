@@ -8,7 +8,7 @@ class Podio::Tag < ActivePodio::Base
     def create(tagable_type, tagable_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/tag/#{tagable_type}/#{tagable_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -18,7 +18,7 @@ class Podio::Tag < ActivePodio::Base
     def update(tagable_type, tagable_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/tag/#{tagable_type}/#{tagable_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body

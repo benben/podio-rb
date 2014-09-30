@@ -20,7 +20,7 @@ class Podio::Grant < ActivePodio::Base
     def create(ref_type, ref_id, attributes={})
       response = Podio.connection.post do |req|
         req.url "/grant/#{ref_type}/#{ref_id}"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body

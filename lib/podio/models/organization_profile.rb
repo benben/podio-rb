@@ -48,7 +48,7 @@ class Podio::OrganizationProfile < ActivePodio::Base
     def create(org_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/org/#{org_id}/appstore"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -58,7 +58,7 @@ class Podio::OrganizationProfile < ActivePodio::Base
     def update(org_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/org/#{org_id}/appstore"
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end

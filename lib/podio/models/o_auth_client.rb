@@ -25,7 +25,7 @@ class Podio::OAuthClient < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url "/oauth/client/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body['auth_client_id']
@@ -34,7 +34,7 @@ class Podio::OAuthClient < ActivePodio::Base
     def create_admin(user_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/oauth/client/user/#{user_id}/"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.status
@@ -43,7 +43,7 @@ class Podio::OAuthClient < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/oauth/client/#{id}"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.status
@@ -52,7 +52,7 @@ class Podio::OAuthClient < ActivePodio::Base
     def update_admin(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/oauth/client/#{id}/admin"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.status

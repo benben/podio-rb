@@ -34,7 +34,7 @@ class Podio::Extension < ActivePodio::Base
     def create(attributes, options={})
       response = Podio.connection.post do |req|
         req.url("/extension/", options)
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
@@ -77,7 +77,7 @@ class Podio::Extension < ActivePodio::Base
     def update(id, attributes, options={})
       response = Podio.connection.put do |req|
         req.url("/extension/#{id}", options)
-        req.body = attributes
+        req.params = attributes
       end
       response.status
     end

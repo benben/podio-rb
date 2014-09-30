@@ -19,7 +19,7 @@ class Podio::Hook < ActivePodio::Base
     def create(hookable_type, hookable_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/hook/#{hookable_type}/#{hookable_id}/"
-        req.body = {:url => attributes[:url], :type => attributes[:type]}
+        req.params = {:url => attributes[:url], :type => attributes[:type]}
       end
 
       response.body['hook_id']
@@ -36,7 +36,7 @@ class Podio::Hook < ActivePodio::Base
     def validate(hook_id, code)
       Podio.connection.post do |req|
         req.url "/hook/#{hook_id}/verify/validate"
-        req.body = {:code => code}
+        req.params = {:code => code}
       end
     end
 

@@ -106,7 +106,7 @@ class Podio::Task < ActivePodio::Base
     def create(attributes, options = {})
       response = Podio.connection.post do |req|
         req.url("/task/", options)
-        req.body = attributes
+        req.params = attributes
       end
 
       list [response.body].flatten
@@ -116,7 +116,7 @@ class Podio::Task < ActivePodio::Base
     def create_with_ref(ref_type, ref_id, attributes, options = {})
       response = Podio.connection.post do |req|
         req.url("/task/#{ref_type}/#{ref_id}/", options)
-        req.body = attributes
+        req.params = attributes
       end
 
       list [response.body].flatten
@@ -126,7 +126,7 @@ class Podio::Task < ActivePodio::Base
     def update(id, attributes, options = {})
       response = Podio.connection.put do |req|
         req.url("/task/#{id}", options)
-        req.body = attributes
+        req.params = attributes
       end
 
       member response.body

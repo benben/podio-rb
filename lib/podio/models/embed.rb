@@ -21,7 +21,7 @@ class Podio::Embed < ActivePodio::Base
     def create(url)
       response = Podio.connection.post do |req|
         req.url '/embed/'
-        req.body = {:url => url }
+        req.params = {:url => url }
       end
       member response.body
     end

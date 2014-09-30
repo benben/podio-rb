@@ -12,7 +12,7 @@ class Podio::Rating < ActivePodio::Base
     def create(ref_type, ref_id, rating_type, value)
       response = Podio.connection.post do |req|
         req.url "/rating/#{ref_type}/#{ref_id}/#{rating_type}"
-        req.body = { :value => value }
+        req.params = { :value => value }
       end
 
       response.body['rating_id']
