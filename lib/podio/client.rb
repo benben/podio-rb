@@ -69,7 +69,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.body = {:grant_type => 'app', :client_id => api_key, :client_secret => api_secret, :app_id => app_id, :app_token => app_token}
+        req.params = {:grant_type => 'app', :client_id => api_key, :client_secret => api_secret, :app_id => app_id, :app_token => app_token}
       end
 
       @oauth_token = OAuthToken.new(response.body)
