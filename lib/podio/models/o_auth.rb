@@ -23,7 +23,7 @@ class Podio::OAuth < ActivePodio::Base
     def get_access_token(attributes)
       response = Podio.connection.post do |req|
         req.url "/oauth/token"
-        req.body = attributes
+        req.params = attributes
       end
 
       response.body
