@@ -12,7 +12,7 @@ class Podio::ContractPriceV2 < ActivePodio::Base
     def calculate(contract_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/contract/#{contract_id}/price/v2"
-        req.params = attributes
+        req.body = attributes
       end
 
       member response.body

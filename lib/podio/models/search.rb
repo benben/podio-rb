@@ -19,7 +19,7 @@ class Podio::Search < ActivePodio::Base
       attributes[:query] = words
       response = Podio.connection.post do |req|
         req.url "/search/org/#{org_id}/"
-        req.params = attributes
+        req.body = attributes
       end
 
       list response.body
@@ -30,7 +30,7 @@ class Podio::Search < ActivePodio::Base
       attributes[:query] = words
       response = Podio.connection.post do |req|
         req.url "/search/"
-        req.params = attributes
+        req.body = attributes
       end
 
       list response.body
@@ -41,7 +41,7 @@ class Podio::Search < ActivePodio::Base
       attributes[:query] = words
       response = Podio.connection.post do |req|
         req.url "/search/space/#{space_id}/"
-        req.params = attributes
+        req.body = attributes
       end
 
       list response.body
@@ -52,7 +52,7 @@ class Podio::Search < ActivePodio::Base
       attributes[:query] = words
       response = Podio.connection.post do |req|
         req.url "/search/app/#{app_id}/"
-        req.params = attributes
+        req.body = attributes
       end
 
       list response.body

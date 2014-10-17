@@ -43,7 +43,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => 'authorization_code', :client_id => api_key, :client_secret => api_secret, :code => authorization_code, :redirect_uri => redirect_uri}
+        req.body = {:grant_type => 'authorization_code', :client_id => api_key, :client_secret => api_secret, :code => authorization_code, :redirect_uri => redirect_uri}
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -56,7 +56,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => 'password', :client_id => api_key, :client_secret => api_secret, :username => username, :password => password}
+        req.body = {:grant_type => 'password', :client_id => api_key, :client_secret => api_secret, :username => username, :password => password}
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -69,7 +69,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => 'app', :client_id => api_key, :client_secret => api_secret, :app_id => app_id, :app_token => app_token}
+        req.body = {:grant_type => 'app', :client_id => api_key, :client_secret => api_secret, :app_id => app_id, :app_token => app_token}
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -82,7 +82,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => 'transfer_token', :client_id => api_key, :client_secret => api_secret, :transfer_token => transfer_token}
+        req.body = {:grant_type => 'transfer_token', :client_id => api_key, :client_secret => api_secret, :transfer_token => transfer_token}
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -94,7 +94,7 @@ module Podio
     def authenticate_with_sso(attributes)
       response = @oauth_connection.post do |req|
         req.url '/oauth/token', :grant_type => 'sso', :client_id => api_key, :client_secret => api_secret
-        req.params = attributes
+        req.body = attributes
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -107,7 +107,7 @@ module Podio
       response = @trusted_connection.post do |req|
         req.url '/oauth/token_by_openid'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => type, :client_id => api_key, :client_secret => api_secret, :identifier => identifier}
+        req.body = {:grant_type => type, :client_id => api_key, :client_secret => api_secret, :identifier => identifier}
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -120,7 +120,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => 'activation_code', :client_id => api_key, :client_secret => api_secret, :activation_code => activation_code}
+        req.body = {:grant_type => 'activation_code', :client_id => api_key, :client_secret => api_secret, :activation_code => activation_code}
       end
 
       @oauth_token = OAuthToken.new(response.body)
@@ -144,7 +144,7 @@ module Podio
       response = @oauth_connection.post do |req|
         req.url '/oauth/token'
         req.headers['Content-Type'] = 'application/x-www-form-urlencoded'
-        req.params = {:grant_type => 'refresh_token', :refresh_token => oauth_token.refresh_token, :client_id => api_key, :client_secret => api_secret}
+        req.body = {:grant_type => 'refresh_token', :refresh_token => oauth_token.refresh_token, :client_id => api_key, :client_secret => api_secret}
       end
 
       @oauth_token = OAuthToken.new(response.body)

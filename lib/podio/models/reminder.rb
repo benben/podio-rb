@@ -20,7 +20,7 @@ class Podio::Reminder < ActivePodio::Base
     def create(ref_type, ref_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/reminder/#{ref_type}/#{ref_id}"
-        req.params = attributes
+        req.body = attributes
       end
       response.status
     end
@@ -29,7 +29,7 @@ class Podio::Reminder < ActivePodio::Base
     def update(ref_type, ref_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/reminder/#{ref_type}/#{ref_id}"
-        req.params = attributes
+        req.body = attributes
       end
       response.status
     end

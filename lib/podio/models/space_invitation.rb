@@ -34,7 +34,7 @@ class Podio::SpaceInvitation < ActivePodio::Base
     def create(space_id, role, attributes={})
       response = Podio.connection.post do |req|
         req.url "/space/#{space_id}/invite"
-        req.params = attributes.merge(:role => role)
+        req.body = attributes.merge(:role => role)
       end
 
       response.body
@@ -43,7 +43,7 @@ class Podio::SpaceInvitation < ActivePodio::Base
     def create_member(space_id, role, attributes={})
       response = Podio.connection.post do |req|
         req.url "/space/#{space_id}/member/"
-        req.params = attributes.merge(:role => role)
+        req.body = attributes.merge(:role => role)
       end
 
       response.body
@@ -52,7 +52,7 @@ class Podio::SpaceInvitation < ActivePodio::Base
     def accept(invite_code)
       response = Podio.connection.post do |req|
         req.url '/space/invite/accept'
-        req.params = {:invite_code => invite_code}
+        req.body = {:invite_code => invite_code}
       end
 
       response.body
@@ -61,7 +61,7 @@ class Podio::SpaceInvitation < ActivePodio::Base
     def decline(invite_code)
       response = Podio.connection.post do |req|
         req.url '/space/invite/decline'
-        req.params = {:invite_code => invite_code}
+        req.body = {:invite_code => invite_code}
       end
 
       response.body

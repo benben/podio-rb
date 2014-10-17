@@ -24,7 +24,7 @@ class Podio::Reference < ActivePodio::Base
     def search(target, query, limit, target_params = nil)
       response = Podio.connection.post do |req|
         req.url "/reference/search"
-        req.params = {
+        req.body = {
           :target => target,
           :text => query,
           :limit => limit

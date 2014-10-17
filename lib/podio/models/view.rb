@@ -44,7 +44,7 @@ class Podio::View < ActivePodio::Base
     def create(app_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/view/app/#{app_id}/"
-        req.params = attributes
+        req.body = attributes
       end
 
       member response.body
@@ -54,7 +54,7 @@ class Podio::View < ActivePodio::Base
     def update(view_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/view/#{view_id}"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.status
@@ -64,7 +64,7 @@ class Podio::View < ActivePodio::Base
     def update_last(app_id, attributes)
       Podio.connection.put do |req|
         req.url "/view/app/#{app_id}/last"
-        req.params = attributes
+        req.body = attributes
       end
     end
 

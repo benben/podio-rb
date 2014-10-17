@@ -15,11 +15,11 @@ class Podio::SpaceMember < ActivePodio::Base
   delegate :user_id, :name, :to => :contact
 
   alias_method :id, :user_id
-
+  
   def employee?
     employee
   end
-
+  
   def external?
     !employee
   end
@@ -60,7 +60,7 @@ class Podio::SpaceMember < ActivePodio::Base
     def update_role(space_id, user_id, role)
       response = Podio.connection.put do |req|
         req.url "/space/#{space_id}/member/#{user_id}"
-        req.params = { :role => role.to_s }
+        req.body = { :role => role.to_s }
       end
       response.status
     end

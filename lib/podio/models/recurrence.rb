@@ -19,7 +19,7 @@ class Podio::Recurrence < ActivePodio::Base
     def update(ref_type, ref_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/recurrence/#{ref_type}/#{ref_id}"
-        req.params = attributes
+        req.body = attributes
       end
       response.status
     end

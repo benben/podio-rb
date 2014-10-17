@@ -39,7 +39,7 @@ class Podio::TaskLabel < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url "/task/label/"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.body['label_id']

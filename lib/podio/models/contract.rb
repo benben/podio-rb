@@ -131,7 +131,7 @@ class Podio::Contract < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url "/contract/"
-        req.params = attributes
+        req.body = attributes
       end
 
       member response.body
@@ -140,7 +140,7 @@ class Podio::Contract < ActivePodio::Base
     def update(contract_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/contract/#{contract_id}"
-        req.params = attributes
+        req.body = attributes
       end
       response.status
     end
@@ -152,7 +152,7 @@ class Podio::Contract < ActivePodio::Base
     def end(contract_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/contract/#{contract_id}/end"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.body
@@ -165,25 +165,25 @@ class Podio::Contract < ActivePodio::Base
     def calculate_price(contract_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/contract/#{contract_id}/price"
-        req.params = attributes
+        req.body = attributes
       end
-
+    
       response.body
     end
 
     def calculate_price_v2(contract_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/contract/#{contract_id}/price/v2"
-        req.params = attributes
+        req.body = attributes
       end
-
+    
       response.body
     end
 
     def create_payment(contract_id, query_string)
       response = Podio.connection.post do |req|
         req.url "/contract/#{contract_id}/payment"
-        req.params = {:query_string => query_string}
+        req.body = {:query_string => query_string}
       end
 
       response.body
@@ -192,7 +192,7 @@ class Podio::Contract < ActivePodio::Base
     def change_to_fixed(contract_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/contract/#{contract_id}/change_to/fixed"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.status

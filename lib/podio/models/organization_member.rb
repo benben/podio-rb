@@ -54,7 +54,7 @@ class Podio::OrganizationMember < ActivePodio::Base
     def make_admin(org_id, user_id)
       response = Podio.connection.post do |req|
         req.url "/org/#{org_id}/admin/"
-        req.params = { :user_id => user_id.to_i }
+        req.body = { :user_id => user_id.to_i }
       end
       response.status
     end

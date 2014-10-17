@@ -10,7 +10,7 @@ class Podio::Category < ActivePodio::Base
     def create(attributes)
       response = Podio.connection.post do |req|
         req.url "/app_store/category/"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.status
@@ -19,7 +19,7 @@ class Podio::Category < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/app_store/category/#{id}"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.status

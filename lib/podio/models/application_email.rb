@@ -17,7 +17,7 @@ class Podio::ApplicationEmail < ActivePodio::Base
     def update_app_configuration(app_id, options)
       Podio.connection.put { |req|
         req.url "/email/app/#{app_id}"
-        req.params = options
+        req.body = options
       }.body
     end
 

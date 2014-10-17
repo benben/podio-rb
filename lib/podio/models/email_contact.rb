@@ -29,7 +29,7 @@ class Podio::EmailContact < ActivePodio::Base
     def export_global(name, linked_acc_id)
       Podio.connection.post { |req|
         req.url "/email/contact/#{name}/export"
-        req.params = { :linked_account_id => linked_acc_id }
+        req.body = { :linked_account_id => linked_acc_id }
       }.body
     end
 
@@ -37,7 +37,7 @@ class Podio::EmailContact < ActivePodio::Base
     def export_ref(name, ref_type, ref_id, linked_acc_id)
       Podio.connection.post { |req|
         req.url "/email/contact/#{name}/#{ref_type}/#{ref_id}/export"
-        req.params = { :linked_account_id => linked_acc_id }
+        req.body = { :linked_account_id => linked_acc_id }
       }.body
     end
 

@@ -41,7 +41,7 @@ class Podio::Comment < ActivePodio::Base
     def create(commentable_type, commentable_id, attributes, options={})
       response = Podio.connection.post do |req|
         req.url("/comment/#{commentable_type}/#{commentable_id}", options)
-        req.params = attributes
+        req.body = attributes
       end
 
       response.body
@@ -51,7 +51,7 @@ class Podio::Comment < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/comment/#{id}"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.status

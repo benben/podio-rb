@@ -34,7 +34,7 @@ class Podio::EmailSubscriptionSetting < ActivePodio::Base
     def update_groups(options)
       Podio.connection.put { |req|
         req.url "/email/group/"
-        req.params = options
+        req.body = options
       }.body
     end
 

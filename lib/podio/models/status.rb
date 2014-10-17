@@ -50,7 +50,7 @@ class Podio::Status < ActivePodio::Base
     def create(space_id, attributes=[], options={})
       response = Podio.connection.post do |req|
         req.url("/status/space/#{space_id}/", options)
-        req.params = attributes
+        req.body = attributes
       end
 
       response.body['status_id']

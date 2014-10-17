@@ -13,7 +13,7 @@ class Podio::Live < ActivePodio::Base
     def create(ref_type, ref_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/live/#{ref_type}/#{ref_id}"
-        req.params = attributes
+        req.body = attributes
       end
 
       member response.body
@@ -22,7 +22,7 @@ class Podio::Live < ActivePodio::Base
     def update(id, attributes)
       response = Podio.connection.put do |req|
         req.url "/live/#{id}/settings"
-        req.params = attributes
+        req.body = attributes
       end
       response.status
     end
@@ -42,7 +42,7 @@ class Podio::Live < ActivePodio::Base
     def authorize(attributes)
       response = Podio.connection.post do |req|
         req.url "/live/omega/authorize"
-        req.params = attributes
+        req.body = attributes
       end
 
       response.body

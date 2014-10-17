@@ -65,7 +65,7 @@ If there is a method missing or you want to do something special, you can use th
     # Posting a status message on space with id 23
     response = Podio.connection.post do |req|
       req.url '/status/space/23/'
-      req.params = {:value => 'This is the text of the status message'}
+      req.body = {:value => 'This is the text of the status message'}
     end
     response.body
 

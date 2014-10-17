@@ -47,7 +47,7 @@ class Podio::Integration < ActivePodio::Base
     def create(app_id, attributes)
       response = Podio.connection.post do |req|
         req.url "/integration/#{app_id}"
-        req.params = {:type => attributes[:type], :silent => attributes[:silent], :config => attributes[:config]}
+        req.body = {:type => attributes[:type], :silent => attributes[:silent], :config => attributes[:config]}
       end
 
       response.body['integration_id']
@@ -57,7 +57,7 @@ class Podio::Integration < ActivePodio::Base
     def update(app_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/integration/#{app_id}"
-        req.params = {:silent => attributes[:silent], :config => attributes[:config]}
+        req.body = {:silent => attributes[:silent], :config => attributes[:config]}
       end
 
       response.body
@@ -67,7 +67,7 @@ class Podio::Integration < ActivePodio::Base
     def update_mapping(app_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/integration/#{app_id}/mapping"
-        req.params = attributes[:mapping]
+        req.body = attributes[:mapping]
       end
     end
 

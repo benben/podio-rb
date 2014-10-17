@@ -25,7 +25,7 @@ class Podio::ContractAccounting < ActivePodio::Base
     def update(contract_id, attributes)
       response = Podio.connection.put do |req|
         req.url "/contract/#{contract_id}/accounting"
-        req.params = attributes
+        req.body = attributes
       end
       response.status
     end
